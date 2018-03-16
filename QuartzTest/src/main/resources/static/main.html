@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>工作流程管理</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <style>
+        .btn-show{
+            margin: 10px 0 10px 10px;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" class="btn btn-default btn-show" value="查询工作" onclick="queryProcess()" />
+    <input type="button" class="btn btn-default btn-show" value="删除" onclick="deleteJob()" />
+    <input type="button" class="btn btn-default btn-show" value="暂停" onclick="pauseJob()" />
+    <input type="button" class="btn btn-default btn-show" value="继续" onclick="resumeJob()" />
+</body>
+<script src="./js/jquery-2.2.3.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script>
+    function StartProcessRepresentation(assignee) {
+        this.assignee = assignee;
+    }
+    function queryProcess() {
+        $.ajax({
+            url: '/tasks',
+            type: 'get',
+            contentType: "application/json",
+            data: {
+                'assignee': '张三李四'
+            },
+            async: false,
+            success: function (response) {
+            },
+            error: function () {
+                console.log('查询失败');
+            }
+        })
+    }
+
+    function deleteJob() {
+        $.ajax({
+            url: '/job/delete',
+            type: 'post',
+            data: {
+                "jobName": 'broadcast'
+            },
+            async: false,
+            success: function (response) {
+            },
+            error: function () {
+                console.log('删除任务失败');
+            }
+        })
+    }
+
+    function pauseJob() {
+        $.ajax({
+            url: '/job/pause',
+            type: 'post',
+            data: {
+                "jobName": 'broadcast'
+            },
+            async: false,
+            success: function (response) {
+            },
+            error: function () {
+                console.log('暂停任务失败');
+            }
+        })
+    }
+
+    function resumeJob() {
+        $.ajax({
+            url: '/job/resume',
+            type: 'post',
+            data: {
+                "jobName": 'broadcast'
+            },
+            async: false,
+            success: function (response) {
+            },
+            error: function () {
+                console.log('继续任务失败');
+            }
+        })
+    }
+</script>
+</html>
